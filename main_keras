@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Aug 28 09:17:22 2018
+
+@author: mansour
+"""
+import numpy as np
+from keras.datasets import mnist
+from keras import models
+from keras import layers 
+from keras.utils import to_categorical
+
+(train_inputs, train_label), (test_inputs, test_labels) = mnist.load_data()
+
+network = models.Sequential()
+network.add(layers.Dense(units=512, activation= "relu", input_shape=(28*28,)))
+network.add(layers.Dense(units=10, activation="softmax"))
+
+network.compile(optimizer="rmsprop", loss="categorical_crossentropy", metrics=["accuracy"])
+
+# Input transformation
+train_inputs = train_inputs.reshape(60000,-1)
+train_inputs = train_inputs.astype("float32") / 255
+
+test_inputs = test_inputs.reshape(10000,-1)
+test_inputs = test_inputs.astype("float32") /255
+
+
+
+# Converting labels to categorical
+train_label = to_categorical(train_label)
+test_labels = to_categorical(test_labels)
+
+# Training
+network.fit(x=train_inputs, y=train_label, epochs=5, batch_size=128)
+
+# Evaluating performance...
+loss_func, model_perf = network.evaluate(test_inputs, test_labels)
+
+print(loss_func, model_perf)
+
