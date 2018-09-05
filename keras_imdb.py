@@ -46,9 +46,6 @@ train_inputs_subset = train_inputs[10000:]
 train_labels_subset = train_labels[10000:]
 
 
-print(train_inputs_subset.shape, train_labels_subset.shape, train_labels_subset.dtype, type(train_inputs_subset))
-print(val_inputs.shape, val_labels.shape, val_inputs.dtype, val_labels.dtype)
-
 # Settig up network...
 network = models.Sequential()
 network.add(layer=layers.Dense(units=16, activation=activations.relu, input_shape=(10000,)))
@@ -85,6 +82,25 @@ plt.ylabel = "Loss"
 plt.legend()
 plt.show()
 
-# Evaluating performance...
-network.summary()
+# Predicting using test data...
+prediction_res = network.predict(test_inputs)
+
+i=0
+for elm in prediction_res:
+    print(elm)
+    i+=1
+    if i>10:
+        break
+
+
+
+
+
+
+
+
+
+
+
+
 
