@@ -88,8 +88,8 @@ epoches = np.arange(1,31)
 plt.plot(epoches, history.history.get('binary_accuracy'),'bo',label='Training_Loss')
 plt.plot(epoches, history.history.get('val_binary_accuracy'),'b',label='Validation_Loss')
 plt.legend()        
-    
-    
+
+  
     
     
     
